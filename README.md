@@ -9,10 +9,18 @@ ChibiGB is GameBoy emulator written by Go. This is my favorite hobby project!
 
 Based on [Gearboy](https://github.com/drhelius/Gearboy).
 
+- [Screenshots](#screenshots)
+  - [`cmd/chibigb` (GameBoy Console)](#cmdchibigb-gameboy-console)
 - [Spec](#spec)
 - [Key binding](#key-binding)
 - [Documents](#documents)
 - [License](#license)
+
+## Screenshots
+
+### `cmd/chibigb` (GameBoy Console)
+
+![Screenshots](https://raw.github.com/kaishuu0123/chibigb/main/screenshots/screenshots001.jpg)
 
 ## Spec
 
