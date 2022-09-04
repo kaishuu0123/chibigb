@@ -7,6 +7,8 @@
 
 ChibiGB is GameBoy emulator written by Go. This is my favorite hobby project!
 
+DMG(Dot Matrix Game) only.
+
 Based on [Gearboy](https://github.com/drhelius/Gearboy).
 
 - [Screenshots](#screenshots)
