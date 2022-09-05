@@ -12,6 +12,8 @@ type Console struct {
 
 	Cartridge  *Cartridge
 	Controller *Controller
+
+	rtcUpdateCount int
 }
 
 func NewConsole() *Console {
@@ -29,6 +31,7 @@ func NewConsole() *Console {
 	console.APU.Reset()
 	console.Memory.Reset()
 	console.Controller.Reset()
+	console.Cartridge.UpdateCurrentRTC()
 
 	return console
 }
@@ -50,6 +53,12 @@ func (console *Console) RunToVBlank() {
 		if totalClocks > 702240 {
 			vblank = true
 		}
+	}
+
+	console.rtcUpdateCount++
+	if console.rtcUpdateCount == 20 {
+		console.rtcUpdateCount = 0
+		console.Cartridge.UpdateCurrentRTC()
 	}
 }
 

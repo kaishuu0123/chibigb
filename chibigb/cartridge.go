@@ -2,6 +2,7 @@ package chibigb
 
 import (
 	"log"
+	"time"
 )
 
 type CartridgeType int
@@ -32,6 +33,7 @@ type Cartridge struct {
 	isSuperGameboy bool
 	hasBattery     bool
 	RTCPresent     bool
+	rtcCurrentTime int64
 	RumblePresent  bool
 }
 
@@ -150,4 +152,15 @@ func (c *Cartridge) collectCartridgeType(cartType byte) {
 	default:
 		c.RumblePresent = false
 	}
+}
+
+func (c *Cartridge) UpdateCurrentRTC() {
+	now := time.Now()
+	nowUTC := now.UTC()
+
+	c.rtcCurrentTime = (nowUTC.UnixNano() / int64(time.Millisecond))
+}
+
+func (c *Cartridge) IsRTCPresent() bool {
+	return c.RTCPresent
 }

@@ -66,6 +66,10 @@ func (m *Memory) SetMemoryBankController() {
 		memoryBankController = NewMemoryBankControllerMBC1(m.console)
 	case CARTRIDGE_MBC2:
 		memoryBankController = NewMemoryBankControllerMBC2(m.console)
+	case CARTRIDGE_MBC3:
+		memoryBankController = NewMemoryBankControllerMBC3(m.console)
+	case CARTRIDGE_MBC5:
+		memoryBankController = NewMemoryBankControllerMBC5(m.console)
 	default:
 		log.Fatalf("not supported cartridge type: %d\n", m.console.Cartridge.cartridgeType)
 	}
