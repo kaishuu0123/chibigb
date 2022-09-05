@@ -52,11 +52,11 @@ func NewMemoryBankControllerMBC3(console *Console) MemoryBankController {
 func (m *MemoryBankControllerMBC3) PerformRead(addr uint16) byte {
 	switch addr & 0xE000 {
 	case 0x4000, 0x6000:
-		return m.console.Cartridge.ROM[(uint64(addr)-0x4000)+uint64(m.currentROMAddress)]
+		return m.console.Cartridge.ROM[uint64(addr-0x4000)+uint64(m.currentROMAddress)]
 	case 0xA000:
 		if m.currentRAMBank >= 0 {
 			if m.ramEnabled {
-				return m.ramBanks[(int(addr)-0xA000)+m.currentRAMAddress]
+				return m.ramBanks[(uint64(addr-0xA000))+uint64(m.currentRAMAddress)]
 			} else {
 				return 0xFF
 			}
@@ -130,7 +130,7 @@ func (m *MemoryBankControllerMBC3) PerformWrite(addr uint16, value byte) {
 	case 0xA000:
 		if m.currentRAMBank >= 0 {
 			if m.ramEnabled {
-				m.console.Cartridge.ROM[(uint64(addr)-0x4000)+uint64(m.currentROMAddress)] = value
+				m.ramBanks[uint64(addr-0xA000)+uint64(m.currentRAMAddress)] = value
 			} else {
 				// NOTHING DONE
 			}
@@ -145,7 +145,7 @@ func (m *MemoryBankControllerMBC3) PerformWrite(addr uint16, value byte) {
 			case 0x0B:
 				m.rtc.days = int32(value)
 			case 0x0C:
-				m.rtc.control = (m.rtc.control & 0x80) | (int32(value) & 0x01)
+				m.rtc.control = (m.rtc.control & 0x80) | (int32(value) & 0xC1)
 			}
 		} else {
 			// NOTHING DONE
@@ -185,7 +185,7 @@ func (m *MemoryBankControllerMBC3) UpdateRTC() {
 			}
 
 			difference /= 24
-			m.rtc.days += int32(difference & 0xFFFFFFFF)
+			m.rtc.days += int32(difference)
 
 			if m.rtc.days > 0xFF {
 				m.rtc.control = (m.rtc.control & 0xC1) | 0x01

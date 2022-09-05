@@ -155,10 +155,7 @@ func (c *Cartridge) collectCartridgeType(cartType byte) {
 }
 
 func (c *Cartridge) UpdateCurrentRTC() {
-	now := time.Now()
-	nowUTC := now.UTC()
-
-	c.rtcCurrentTime = (nowUTC.UnixNano() / int64(time.Millisecond))
+	c.rtcCurrentTime = time.Now().Unix()
 }
 
 func (c *Cartridge) IsRTCPresent() bool {
