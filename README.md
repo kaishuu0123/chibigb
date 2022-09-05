@@ -34,8 +34,8 @@ Based on [Gearboy](https://github.com/drhelius/Gearboy).
   - [X] No MBC
   - [X] MBC1
   - [X] MBC2
-  - [ ] MBC3
-  - [ ] MBC5
+  - [X] MBC3
+  - [X] MBC5
   - [ ] MBC6
   - [ ] MBC7
   - [ ] MMM01
